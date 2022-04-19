@@ -82,7 +82,7 @@ jobs:
             rmdir eksctl_download
             
       - aws-eks/create-cluster:
-          cluster-name: eks-cluster-jacklawrence
+          cluster-name: eks-cluster
           aws-region: eu-central-1
 
   deploy-app-eks:
