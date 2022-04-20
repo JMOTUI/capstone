@@ -157,10 +157,13 @@ workflows:
       - build-and-deploy-docker-image:
           requires: [build-environment]
       - create-cluster:
+          requires: [build-and-deploy-docker-image]
           cluster-name: eks-cluster-mohme
       - deploy-app-eks:
           requires: [build-and-deploy-docker-image,create-cluster]
           cluster-name: eks-cluster-mohme
           aws-region: eu-central-1
       - delete-cluster:
+          requires: [build-and-deploy-docker-image,create-cluster,deploy-app-eks]
           cluster-name: eks-cluster-mohme
+          
