@@ -50,7 +50,7 @@ jobs:
           command: |
             # the docker password is stored in circleci in the environment variables
             docker login -u jensmohmetui -p ${DOCKER_PASSWORD}
-            # docker build 
+            # docker build
             docker build -t jensmohmetui/capstone .
             # docker push
             docker push jensmohmetui/capstone
