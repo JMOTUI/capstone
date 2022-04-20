@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   aws-eks: circleci/aws-eks@1.1.0
+  # can use an orb for kubernetes here!
   kubernetes: circleci/kubernetes@0.4.0
 
 jobs:
@@ -12,11 +13,11 @@ jobs:
 
     steps:
       - checkout
-      # Download and cache dependencies
+      # Download and cache the dependencies
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "requirements.txt" }}
-            # fallback to using the latest cache if no exact match is found
+            # fallback to using the latest cache if no match is found
             - v1-dependencies-
       - run:
           name: install dependencies
@@ -27,6 +28,7 @@ jobs:
             # Install hadolint
             wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
             chmod +x /bin/hadolint
+            # pylint here
             pip install pylint
       - save_cache:
           paths:
@@ -46,13 +48,12 @@ jobs:
       - run: 
           name: build, tag and push image
           command: |
-            docker login -u jacklawrencetui -p ${DOCKER_PASSWORD}
-            # build 
-            docker build -t jacklawrencetui/app:${CIRCLE_WORKFLOW_ID:0:7} .
-            # tag
-            docker tag jacklawrencetui/app:${CIRCLE_WORKFLOW_ID:0:7} jacklawrencetui/app:latest
-            # push
-            docker push jacklawrencetui/app:latest
+            # the docker password is stored in circleci in the environment variables
+            docker login -u jensmohmetui -p ${DOCKER_PASSWORD}
+            # docker build 
+            docker build -t jensmohmetui/capstone .
+            # docker push
+            docker push jensmohmetui/capstone
             
   create-cluster:
     executor: aws-eks/python3
@@ -67,7 +68,7 @@ jobs:
           name: Install the eksctl tool
           command: |
             if which eksctl > /dev/null; then
-              echo "eksctl is already installed"
+              echo "eksctl is installed already"
               exit 0
             fi
             mkdir -p eksctl_download
