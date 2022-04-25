@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: jensmohmetui/capstone
+        image: jensmohmetui/capstone:latest
         imagePullPolicy: Always
         resources:
           requests:
