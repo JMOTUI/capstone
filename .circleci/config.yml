@@ -106,10 +106,10 @@ jobs:
           aws-region: eu-central-1
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
-          resource-file-path: "app-deployment.yaml"          
+          resource-file-path: "app-deployment.yml"          
           resource-name: deployment/app
       - kubernetes/create-or-update-resource:
-          resource-file-path: "app-service.yaml"
+          resource-file-path: "app-service.yml"
       - run:
           name: information
           command: |
