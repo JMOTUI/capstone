@@ -156,9 +156,9 @@ workflows:
       - build-environment
       - build-and-deploy-docker-image:
           requires: [build-environment]
-      - create-cluster:
-          requires: [build-and-deploy-docker-image]
-          cluster-name: eks-cluster-mohme
+      #- create-cluster:
+      #    requires: [build-and-deploy-docker-image]
+      #    cluster-name: eks-cluster-mohme
       - deploy-app-eks:
           requires: [build-and-deploy-docker-image,create-cluster]
           cluster-name: eks-cluster-mohme
