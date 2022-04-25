@@ -16,6 +16,7 @@ spec:
       containers:
       - name: app
         image: jensmohmetui/capstone
+        imagePullPolicy: Always
         resources:
           requests:
             cpu: 100m
