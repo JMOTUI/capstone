@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - checkout
-      # Download and cache the dependencies 
+      # Download and cache the dependencies
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "requirements.txt" }}
